@@ -1,0 +1,440 @@
+/** {
+  margin: 0;
+  padding: 0;
+ box-sizing: border-box;
+}
+
+html, body, #root {
+  height: 100%;
+  width: 100%;
+  font-family: 'Arial', sans-serif; 
+  margin-top: 5px;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f3f4f6; 
+}
+
+#root {
+  background-color: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.main {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+div.sub-main {
+  width: 100%;
+  max-width: 400px;
+  padding: 40px;
+  background-color: white; 
+  border-radius: 20px;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1); 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.input-container {
+  position: relative;
+  width: 100%;
+  margin: 20px 0;
+  display: flex;
+  align-items: center;
+}
+
+.container-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.icon {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+}
+
+
+.fill {
+  width: 100%;
+  padding: 12px 12px 12px 50px;
+  font-size: 16px;
+  border-radius: 30px;
+  border: 1px solid #ddd;
+  transition: border 0.3s, box-shadow 0.3s;
+  box-shadow: inset 0px 0px 25px 0px #888;
+}
+
+.fill:focus {
+  border: 1px solid #007bff;
+  box-shadow: 0px 0px 8px rgba(0, 123, 255, 0.4); 
+  outline: none;
+}
+
+
+.container-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+  width: 100px;
+}
+
+.profile {
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+  padding: 5px;
+  object-fit: cover;
+}
+
+.LHeader {
+  font-size: 2.5em;
+  color: #333;
+  margin-bottom: 20px;
+  text-align: center;
+  font-weight: 600;
+}
+
+button {
+  width: 100%;
+  height: 50px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+
+button:hover {
+  background-color: #0aab35;
+  box-shadow: 0px 4px 10px rgba(0, 123, 255, 0.3);
+}
+
+.login-btn {
+  width: 95%;
+  margin: 15px auto; 
+  display: flex;
+  justify-content: center;
+}
+
+.link {
+  text-decoration: none;
+  color: black;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.reg-link {
+  margin-top: 10px;
+  text-align: center;
+  font-size: 18px;
+  color: #666;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+li {
+  list-style-type: none;
+  font-size: 18px;
+}
+
+.loading-spinner {
+  font-size: 20px;
+  font-weight: bold;
+  color: #007bff;
+  text-align: center;
+  margin: 20px 0;
+} */
+
+
+
+
+
+
+
+/*@media (max-width: 768px) {
+  .sub-main {
+    padding: 30px;
+  }
+  
+  .LHeader {
+    font-size: 2.5em;
+  }
+  
+  button {
+    font-size: 16px;
+    height: 40px;
+  }
+  
+  .fill {
+    font-size: 14px;
+    padding: 10px 10px 10px 45px;
+  }
+}
+
+@media (max-width: 576px) {
+  .sub-main {
+    padding: 20px;
+    max-width: 90%;
+  }
+  
+  .LHeader {
+    font-size: 1.8em;
+  }
+  
+  button {
+    font-size: 14px;
+    height: 45px;
+  }
+  
+  .fill {
+    font-size: 14px;
+  }
+  
+  .icon {
+    width: 18px;
+    height: 18px;
+  }
+  
+  .profile {
+    height: 80px;
+    width: 80px;
+  }
+  
+  .reg-link {
+    font-size: 16px;
+  }
+  
+  li {
+    font-size: 16px;
+  }
+} */
+
+
+
+
+
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  height: 100%;
+  width: 100%;
+  font-family: 'Arial', sans-serif; /* Fonte mais limpa e legível */
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f3f4f6; /* Fundo claro, agradável aos olhos */
+}
+
+#root {
+  background-color: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.main {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Estilos do contêiner do formulário */
+div.sub-main {
+  width: 100%;
+  max-width: 400px; /* Largura mais compacta para o formulário */
+  padding: 40px;
+  background-color: white;
+  border-radius: 50px;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1); /* Sombra suave para elevação */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Estilo para imagem de perfil */
+.container-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.profile {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 2px solid #007bff; /* Borda que combina com o tema */
+  padding: 5px;
+}
+
+.LHeader {
+  font-size: 2.5em;
+  color: #333;
+  margin-bottom: 20px;
+  text-align: center;
+  font-weight: 600;
+}
+
+/* Estilos para campos de entrada */
+.input-container {
+  position: relative;
+  width: 100%;
+  margin: 15px 0;
+  display: flex;
+  align-items: center;
+}
+
+.icon {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+}
+
+.fill {
+  width: 100%;
+  padding: 12px 12px 12px 45px;
+  font-size: 16px;
+  border-radius: 30px;
+  border: 1px solid #ddd;
+  transition: border 0.3s, box-shadow 0.3s;
+}
+
+.fill:focus {
+  border: 1px solid #007bff;
+  box-shadow: 0px 0px 8px rgba(0, 123, 255, 0.4); /* Destaque ao focar */
+  outline: none;
+}
+
+/* Botão de login */
+.button {
+  width: 100%;
+  height: 50px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.button:hover {
+  background-color: #0056b3;
+  box-shadow: 0px 4px 10px rgba(111, 201, 111, 0.3);
+}
+
+.login-btn {
+  width: 100%;
+  margin: 20px 0;
+  display: flex;
+  justify-content: center;
+}
+
+/* Links e registro */
+.reg-link {
+  text-align: center;
+  font-size: 16px;
+  color: #666;
+}
+
+.link {
+  text-decoration: none;
+  color: #007bff;
+  font-weight: bold;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+/* Estilos responsivos */
+@media (max-width: 768px) {
+  .sub-main {
+    padding: 30px;
+  }
+  
+  .LHeader {
+    font-size: 2em;
+  }
+  
+  button {
+    font-size: 16px;
+  }
+  
+  .fill {
+    font-size: 14px;
+    padding: 10px 10px 10px 45px;
+  }
+}
+
+@media (max-width: 576px) {
+  .sub-main {
+    padding: 20px;
+    max-width: 90%;
+  }
+  
+  .LHeader {
+    font-size: 1.8em;
+  }
+  
+  button {
+    font-size: 14px;
+    height: 45px;
+  }
+  
+  .fill {
+    font-size: 14px;
+  }
+  
+  .profile {
+    width: 80px;
+    height: 80px;
+  }
+}
+
+
+
+
+
+
+
+
+
+

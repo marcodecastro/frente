@@ -1,0 +1,161 @@
+.logged-in-home-page {
+    margin-top: 0; 
+    background-color: black;
+    color: rgb(200, 200, 150);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Arial', sans-serif;
+    height: 100%;
+    
+  }
+  
+  .home-header h1 {
+    margin-top: 2vh;
+    font-size: 4em;
+    text-align: center;
+  }
+  
+  .home-header p {
+    font-size: 2.5em;
+    margin-top: 2em;
+  }
+  
+  .home-content p {
+    max-width: 800px;
+    text-align: justify;
+    margin-bottom: 25px; 
+    margin-top: 16px; 
+    line-height: 1.5; 
+    letter-spacing: 0.3px; 
+  }
+  
+  .home-image {
+    width: 100%;
+    height: auto;
+    max-height: 30vh; 
+    border-radius: 10px;
+    margin-top: 4vh;
+    margin-bottom: 40px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+  }
+  
+  .home-links {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 20px;
+  }
+  
+  .home-link {
+    background-color: rgb(230, 230, 160);
+    border-radius: 7px;
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+    padding: 12px 24px;
+    border: 1px solid #333;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+    margin-top: 20px;
+  }
+  
+  .home-link:focus,
+  .home-link:hover {
+    background-color: #333;
+    color: #fff;
+    transform: translateY(-3px);
+    box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.3);
+  }
+  
+  .home-link:focus::after,
+  .home-link:hover::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    border-radius: 7px;
+    background-color: rgba(255, 255, 255, 0.2);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  .home-link:focus::after,
+  .home-link:hover::after {
+    opacity: 1;
+  }
+  
+  /* Estilos do rodapé */
+  footer {
+    margin-top: 1em;
+    text-decoration: none;
+    color: rgb(230, 230, 160);
+    text-align: center;
+    font-size: small; /* Define o tamanho da fonte do texto do rodapé */
+    padding: 10px 0; /* Adiciona espaço entre o conteúdo do rodapé e as bordas */
+  }
+  
+  footer p {
+    margin: 5px 0; 
+    text-decoration: none;
+    font-size: small; 
+    text-align: center;
+  }
+  
+  footer a {
+    text-decoration: none;
+    color: rgb(230, 230, 160);
+  }
+  
+  footer a:hover {
+    color: white;
+  }
+  
+  
+  
+  /* Media queries para tornar a página responsiva */
+  @media screen and (max-width: 768px) {
+    .logged-in-home-page {
+      padding: 20px;
+    }
+  
+    .home-header h1 {
+      font-size: 1.5em;
+      margin-bottom: 8px;
+    }
+  
+    .home-header p {
+      font-size: 1em;
+    }
+  
+    .home-content {
+      max-width: 100%;
+      margin-bottom: 30px;
+    }
+  
+    .home-image {
+      margin-top: 8px;
+      margin-bottom: 15px;
+    }
+  
+    .home-links {
+      flex-direction: column;
+      gap: 20px;
+      margin-top: 20px;
+      text-align: center;
+    }
+  
+    .home-link {
+      padding: 10px 20px;
+      font-size: 0.9em;
+      width: 100%;
+      box-sizing: border-box;
+    }
+  }
+  

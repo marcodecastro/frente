@@ -1,0 +1,167 @@
+.common-form h2 {
+  margin-bottom: 30px;
+  text-align: center;
+  font-size: 2.5rem;
+  font-family: Arial, sans-serif;
+}
+
+.common-form {
+  background-color: rgb(237, 243, 241);
+  width: 90%; 
+  max-width: 600px; 
+  margin: 0 auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+
+
+}
+
+.common-form .form-group {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.common-form .form-group select,
+.common-form .form-group input[type="text"],
+.common-form .form-group input[type="date"],
+.common-form .form-group input[type="time"],
+.common-form .form-group textarea {
+  width: 100%; /* Ajuste para largura completa */
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1.2rem;
+  box-sizing: border-box;
+
+  align-items: center;
+  justify-content: center;
+  /*text-align: center;*/
+
+}
+
+.common-form .form-group label {
+  font-size: 1.2rem;
+  margin-bottom: 5px;
+  font-family: Arial, sans-serif;
+}
+
+.common-form .form-group .add-button,
+.common-form .form-group .submit-button,
+.common-form .form-group .remove-button {
+  width: 100%;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 15px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.common-form .form-group .add-button:hover,
+.common-form .form-group .submit-button:hover,
+.common-form .form-group .remove-button:hover {
+  background-color: #0aab35;
+}
+
+.common-form .error-message {
+  color: red;
+  margin-top: 10px;
+}
+
+.common-form .success-message {
+  color: green;
+  margin-top: 10px;
+}
+
+.common-form .loading-message {
+  color: blue;
+  margin-top: 10px;
+}
+
+button {
+  margin-top: 10px;
+  width: 100%;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+
+
+
+/* Media queries para responsividade */
+@media (max-width: 768px) {
+  .common-form {
+    padding: 15px;
+  }
+
+  .common-form h2 {
+    font-size: 2rem;
+  }
+
+  .common-form .form-group label {
+    font-size: 1rem;
+  }
+
+  .common-form .form-group select,
+  .common-form .form-group input[type="text"],
+  .common-form .form-group input[type="date"],
+  .common-form .form-group input[type="time"],
+  .common-form .form-group textarea {
+    font-size: 1rem;
+    padding: 8px;
+  }
+
+  .common-form .form-group .add-button,
+  .common-form .form-group .submit-button,
+  .common-form .form-group .remove-button {
+    font-size: 1rem;
+    padding: 8px 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .common-form {
+    padding: 10px;
+  }
+
+  .common-form h2 {
+    font-size: 1.8rem;
+  }
+
+  .common-form .form-group label {
+    font-size: 0.9rem;
+  }
+
+  .common-form .form-group select,
+  .common-form .form-group input[type="text"],
+  .common-form .form-group input[type="date"],
+  .common-form .form-group input[type="time"],
+  .common-form .form-group textarea {
+    font-size: 0.9rem;
+    padding: 6px;
+  }
+
+  .common-form .form-group .add-button,
+  .common-form .form-group .submit-button,
+  .common-form .form-group .remove-button {
+    font-size: 0.9rem;
+    padding: 6px 10px;
+  }
+}
+
+  
+  
+  
