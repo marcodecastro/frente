@@ -45,8 +45,8 @@ const Adicionais = () => {
         };
       });
 
+      const response = await fetchWithToken('https://detras.onrender.com/api/adicionais', {
       //const response = await fetchWithToken('http://localhost:5000/api/adicionais', {
-      const response = await fetchWithToken('http://localhost:5000/api/adicionais', {
         method: 'POST',
         body: JSON.stringify({ cim: memberId, graus_adicionais: formattedDegrees }),
         headers: { 'Content-Type': 'application/json' }

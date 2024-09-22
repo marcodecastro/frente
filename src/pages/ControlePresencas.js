@@ -34,8 +34,8 @@ const ControlePresencas = () => {
 
   // Fetch dados de membros e reuniões
   useEffect(() => {
+    fetch('https://detras.onrender.com/api/presencas/membros')
     //fetch('http://localhost:5000/api/presencas/membros')
-    fetch('http://localhost:5000/api/presencas/membros')
       .then(response => response.json())
       .then(data => {
         const initialPresencas = data.reduce((acc, membro) => {
@@ -47,8 +47,8 @@ const ControlePresencas = () => {
       })
       .catch(error => console.error('Erro ao buscar membros:', error));
 
+    fetch('https://detras.onrender.com/api/presencas/reunioes')
     //fetch('http://localhost:5000/api/presencas/reunioes')
-    fetch('http://localhost:5000/api/presencas/reunioes')
       .then(response => response.json())
       .then(data => {
         setReunioes(data);
@@ -58,8 +58,8 @@ const ControlePresencas = () => {
 
   // Fetch dados de presenças para o gráfico
   useEffect(() => {
+    fetch('https://detras.onrender.com/api/presencas/listar')
     //fetch('http://localhost:5000/api/presencas/listar')
-    fetch('http://localhost:5000/api/presencas/listar')
       .then(response => response.json())
       .then(data => {
         setDados(data);
@@ -87,8 +87,8 @@ const ControlePresencas = () => {
       data_reuniao: dataReuniao,
     }));
 
+    fetch('https://detras.onrender.com/api/presencas/registrar', {
     //fetch('http://localhost:5000/api/presencas/registrar', {
-    fetch('http://localhost:5000/api/presencas/registrar', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
