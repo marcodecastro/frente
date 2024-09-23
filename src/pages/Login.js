@@ -227,7 +227,7 @@ const Login = () => {
   useEffect(() => {
     if (!userLoading && user) {
       if (user.is_admin) {
-        navigate('/admin');
+        navigate('/comemoracoes');
       } else {
         navigate('/inicial');
       }

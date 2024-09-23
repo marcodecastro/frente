@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Typography, CircularProgress, Card, CardContent, List } from '@mui/material';
 import withAdminProtection from '../withAdminProtection';
+import voltar from '../images/voltar.png';
 //import '../styles/Comemoracoes.css';
+import { useNavigate } from 'react-router-dom';
 
 const Comemoracoes = () => {
     const [comemoracoesHoje, setComemoracoesHoje] = useState([]);
@@ -13,6 +15,7 @@ const Comemoracoes = () => {
     const [comemoracoesBrasil, setComemoracoesBrasil] = useState([]);
     const [loadingBrasil, setLoadingBrasil] = useState(true);
     const [errorBrasil, setErrorBrasil] = useState(null);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchComemoracoesHoje = async () => {
@@ -91,6 +94,13 @@ const Comemoracoes = () => {
 
     return (
         <Container>
+
+      <img 
+        src={voltar} 
+        alt="Voltar" 
+        onClick={() => navigate('/inicial')} // Redireciona para a página inicial
+        style={{ cursor: 'pointer', position: 'absolute', top: '20px', left: '20px', width: '40px', height: '40px' }}
+      />
             
             <Typography variant="h4" gutterBottom>Comemorações de Hoje</Typography>
             <List>
