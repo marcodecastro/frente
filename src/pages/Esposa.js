@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import moment from 'moment';
 import { fetchWithToken } from '../fetchUtils';
-//import '../styles/common-form.css';
+import '../styles/common-form.css';
 
 const Esposa = ({ esposaId }) => {
   const [spouseName, setSpouseName] = useState('');
