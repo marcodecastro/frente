@@ -40,7 +40,8 @@ const Esposa = ({ esposaId }) => {
     
     try {
       setLoading(true);
-      const response = await fetchWithToken('http://localhost:5000/api/esposa', {
+      const response = await fetchWithToken('https://detras.onrender.com/api/esposa', {
+      //const response = await fetchWithToken('http://localhost:5000/api/esposa', {
         method: 'POST',
         body: JSON.stringify({ 
           nome: spouseName, 
