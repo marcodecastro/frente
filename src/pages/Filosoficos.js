@@ -44,7 +44,8 @@ const Filosoficos = ({ filosoficosId }) => {
         };
       });
 
-      const response = await fetchWithToken('http://localhost:5000/api/filosoficos', {
+      const response = await fetchWithToken('https://detras.onrender.com/api/filosoficos', {
+      //const response = await fetchWithToken('http://localhost:5000/api/filosoficos', {
         method: 'POST',
         body: JSON.stringify({ cim: memberId, graus_filosoficos: formattedDegrees }),
         headers: { 'Content-Type': 'application/json' } // Certifique-se de que o Content-Type seja especificado.

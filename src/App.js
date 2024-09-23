@@ -11,7 +11,9 @@ import Comemoracoes from './pages/Comemoracoes';
 import Membro from './pages/Membro';
 import Esposa from './pages/Esposa';
 import Filhos from './pages/Filhos';
+import Adicionais from './pages/Adicionais';
 import Filosoficos from './pages/Filosoficos';
+import Simbolicos from './pages/Simbolicos';
 
 import './styles/reset.css';
 
@@ -30,7 +32,11 @@ function App() {
             <Route path="/inicial" element={<Inicial />} />
             <Route path="/esposa" element={<Esposa />} />
             <Route path="/filhos" element={<Filhos />} />
+            <Route path="/adicionais" element={<Adicionais />} />
             <Route path="/filosoficos" element={<Filosoficos />} />
+            <Route path="/simbolicos" element={<Simbolicos />} />
+
+
           </Route>
 
           {/* Rotas exclusivas para administradores */}
