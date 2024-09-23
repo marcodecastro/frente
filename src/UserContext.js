@@ -10,7 +10,8 @@ export const UserProvider = ({ children }) => {
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const data = await fetchWithToken('http://localhost:5000/api/auth/validate');
+        const data = await fetchWithToken('https://detras.onrender.com/api/auth/validate');
+        //const data = await fetchWithToken('http://localhost:5000/api/auth/validate');
         console.log('Dados do usuário carregados:', data);
         setUser(data); // Atualiza o estado do usuário com os dados retornados
       } catch (error) {
