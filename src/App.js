@@ -35,8 +35,6 @@ function App() {
             <Route path="/adicionais" element={<Adicionais />} />
             <Route path="/filosoficos" element={<Filosoficos />} />
             <Route path="/simbolicos" element={<Simbolicos />} />
-
-
           </Route>
 
           {/* Rotas exclusivas para administradores */}
