@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import withAdminProtection from '../withAdminProtection';
 import '../styles/common-form.css';
 
 const AddEventForm = () => {
@@ -29,16 +28,16 @@ const AddEventForm = () => {
     try {
       let response;
       if (eventData.id) { // Se o evento já tem um ID, atualize-o
-        response = await fetch(`http://localhost:5000/api/events/${eventData.id}`, {
         //response = await fetch(`http://localhost:5000/api/events/${eventData.id}`, {
+        response = await fetch(`https://detras.onrender.com/api/events/${eventData.id}`, {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(eventData),
         });
       } else { // Se o evento não tem um ID, crie um novo
-        response = await fetch('http://localhost:5000/api/events', {
         //response = await fetch('http://localhost:5000/api/events', {
-          method: 'POST',
+        response = await fetch('https://detras.onrender.com/api/events', {
+                   method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(eventData),
         });
@@ -139,4 +138,4 @@ const AddEventForm = () => {
   );
 };
 
-export default withAdminProtection(AddEventForm);
+export default AddEventForm;

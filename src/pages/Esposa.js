@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import moment from 'moment';
 import { fetchWithToken } from '../fetchUtils';
 import '../styles/common-form.css';
+import voltar from '../images/voltar.png';
+import { useNavigate } from 'react-router-dom';
 
 const Esposa = ({ esposaId }) => {
   const [spouseName, setSpouseName] = useState('');
@@ -10,6 +12,8 @@ const Esposa = ({ esposaId }) => {
   const [error, setError] = useState(null);
   const [successMessage, setSuccessMessage] = useState(null); 
   const [loading, setLoading] = useState(false);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchEsposaData = async () => {
@@ -65,6 +69,14 @@ const Esposa = ({ esposaId }) => {
 
   return (
     <div className='common-form'>
+
+      <img 
+        src={voltar} 
+        alt="Voltar" 
+        onClick={() => navigate('/inicial')} // Redireciona para a página inicial
+        style={{ cursor: 'pointer', position: 'absolute', top: '20px', left: '20px', width: '40px', height: '40px' }}
+      />
+
       <h2>{esposaId ? 'Atualizar Nome da Esposa' : 'Nome da Esposa'}</h2>
       <form onSubmit={handleSubmit}>
         <div className="form-group">

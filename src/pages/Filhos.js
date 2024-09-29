@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import moment from 'moment';
 import { fetchWithToken } from '../fetchUtils';
 import '../styles/common-form.css';
+import voltar from '../images/voltar.png';
+import { useNavigate } from 'react-router-dom';
 
 const Filho = ({ filhoId }) => {
   const [filhoName, setFilhoName] = useState('');
@@ -10,6 +12,8 @@ const Filho = ({ filhoId }) => {
   const [error, setError] = useState(null);
   const [successMessage, setSuccessMessage] = useState(null); 
   const [loading, setLoading] = useState(false);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchFilhoData = async () => {
@@ -39,7 +43,8 @@ const Filho = ({ filhoId }) => {
     
     try {
       setLoading(true);
-      const response = await fetchWithToken('http://localhost:5000/api/filhos', {
+      const response = await fetchWithToken('https://detras.onrender.com/api/filhos', {
+      //const response = await fetchWithToken('http://localhost:5000/api/filhos', {
         method: 'POST',
         body: JSON.stringify({ 
           nome: filhoName, 
@@ -63,6 +68,14 @@ const Filho = ({ filhoId }) => {
 
   return (
     <div className='common-form'>
+
+     <img 
+        src={voltar} 
+        alt="Voltar" 
+        onClick={() => navigate('/inicial')} // Redireciona para a página inicial
+        style={{ cursor: 'pointer', position: 'absolute', top: '20px', left: '20px', width: '40px', height: '40px' }}
+      />
+
       <h2>{filhoId ? 'Atualizar Nome do Filho' : 'Cadastrar Nome do Filho'}</h2>
       <form onSubmit={handleSubmit}>
         <div className="form-group">

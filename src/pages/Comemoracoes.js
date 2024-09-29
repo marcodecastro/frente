@@ -2,8 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { Container, Typography, CircularProgress, Card, CardContent, List } from '@mui/material';
 import withAdminProtection from '../withAdminProtection';
 import voltar from '../images/voltar.png';
-//import '../styles/Comemoracoes.css';
+import '../styles/Comemoracoes.css';
 import { useNavigate } from 'react-router-dom';
+import { fetchWithToken } from '../fetchUtils';
+
 
 const Comemoracoes = () => {
     const [comemoracoesHoje, setComemoracoesHoje] = useState([]);
@@ -20,8 +22,8 @@ const Comemoracoes = () => {
     useEffect(() => {
         const fetchComemoracoesHoje = async () => {
             try {
-                const response = await fetch('https://detras.onrender.com/api/comemoracoes/comemoracoes');
-                //const response = await fetch('http://localhost:5000/api/comemoracoes/comemoracoes');
+                const response = await fetchWithToken('https://detras.onrender.com/api/comemoracoes/comemoracoes');
+                //const response = await fetchWithToken('http://localhost:5000/api/comemoracoes/comemoracoes');
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
@@ -37,8 +39,8 @@ const Comemoracoes = () => {
 
         const fetchComemoracoesSemana = async () => {
             try {
-                const response = await fetch('https://detras.onrender.com/api/comemoracoes-semana/comemoracoes-semana');
-                //const response = await fetch('http://localhost:5000/api/comemoracoes-semana/comemoracoes-semana');
+                //const response = await fetch('https://detras.onrender.com/api/comemoracoes-semana/comemoracoes-semana');
+                const response = await fetch('http://localhost:5000/api/comemoracoes-semana/comemoracoes-semana');
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
@@ -55,8 +57,8 @@ const Comemoracoes = () => {
 
         const fetchComemoracoesBrasil = async () => {
             try {
-                const response = await fetch('https://detras.onrender.com/api/comemoracoes-brasil/comemoracoes-brasil');
-                //const response = await fetch('http://localhost:5000/api/comemoracoes-brasil/comemoracoes-brasil');
+                //const response = await fetch('https://detras.onrender.com/api/comemoracoes-brasil/comemoracoes-brasil');
+                const response = await fetch('http://localhost:5000/api/comemoracoes-brasil/comemoracoes-brasil');
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
@@ -93,6 +95,13 @@ const Comemoracoes = () => {
     }
 
     return (
+
+        <div>
+        <div className="comemoracoes-container">
+            <h1>Comemorações</h1>
+            <p>Comemorações de hoje, da semana e do Brasil.</p>
+        </div>
+        
         <Container>
 
       <img 
@@ -136,6 +145,7 @@ const Comemoracoes = () => {
                 ))}
             </List>
         </Container>
+        </div>
     );
 };
 

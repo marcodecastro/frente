@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import moment from 'moment';
 import { fetchWithToken } from '../fetchUtils';
 import '../styles/common-form.css';
+import voltar from '../images/voltar.png';
+import { useNavigate } from 'react-router-dom';
 
 const Casamento = ({ casamentoId }) => {
   const [casamento, setCasamento] = useState('');
@@ -10,6 +12,9 @@ const Casamento = ({ casamentoId }) => {
   const [error, setError] = useState(null);
   const [successMessage, setSuccessMessage] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [errorData, setErrorData] = useState(null);
+
+  const navigate = useNavigate();
 
   // Fetch data if casamentoId is provided
   useEffect(() => {
@@ -35,31 +40,31 @@ const Casamento = ({ casamentoId }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-
-    // Validate all fields are filled
+  
     if (!casamento || !memberId || !dataCasamento) {
       setError('Por favor, preencha todos os campos.');
       setLoading(false);
       return;
     }
-
+  
     try {
-      console.log('Enviando dados do casamento para o backend:', { memberId, casamento, dataCasamento });
-      const response = await fetchWithToken('http://localhost:5000/api/casamento', {
+      const response = await fetchWithToken('https://detras.onrender.com/api/casamento', {
+      //const response = await fetchWithToken('http://localhost:5000/api/casamento', {
         method: 'POST',
         body: JSON.stringify({
           nome_conjuge: casamento,
-          data_casamento: moment(dataCasamento).format('YYYY-MM-DD'), // Ensure the date is formatted correctly
+          data_casamento: moment(dataCasamento).format('YYYY-MM-DD'),
           cim: memberId,
         }),
       });
-
-      setLoading(false);
-
-      // Handle response and display appropriate messages
-      if (response.ok) {
-        const responseData = await response.json();
-        setSuccessMessage(responseData.message || 'Dados enviados com sucesso.');
+  
+      // Verifique se a resposta é válida
+      if (response) {
+        // Assumimos que fetchWithToken retorna a resposta corretamente
+        const successMessage = response.message.includes('atualizada')
+          ? 'Dados atualizados com sucesso.'
+          : 'Dados cadastrados com sucesso.';
+        setSuccessMessage(successMessage);
         setCasamento('');
         setDataCasamento('');
         setMemberId('');
@@ -69,13 +74,25 @@ const Casamento = ({ casamentoId }) => {
       }
     } catch (error) {
       console.error('Erro ao enviar dados:', error);
-      setError('Erro ao enviar dados. Tente novamente mais tarde.');
+      setError(error.message || 'Erro ao enviar dados. Tente novamente mais tarde.');
+    } finally {
       setLoading(false);
     }
   };
+  
+
+
 
   return (
     <div className='common-form'>
+
+      <img 
+        src={voltar} 
+        alt="Voltar" 
+        onClick={() => navigate('/inicial')} // Redireciona para a página inicial
+        style={{ cursor: 'pointer', position: 'absolute', top: '20px', left: '20px', width: '40px', height: '40px' }}
+      />
+
       <h2>{casamentoId ? 'Atualizar Aniversário de Casamento' : 'Cadastrar Aniversário de Casamento'}</h2>
       <form onSubmit={handleSubmit}>
         <div className="form-group">

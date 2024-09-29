@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import '../styles/common-form.css';
 import { UserContext } from '../UserContext';
 import {  fetchWithToken } from '../fetchUtils';
+import voltar from '../images/voltar.png';
+
 
 const Membro = () => {
   const [memberName, setMemberName] = useState('');
@@ -67,6 +69,12 @@ const Membro = () => {
 
   return (
     <div className="common-form">
+      <img 
+        src={voltar} 
+        alt="Voltar" 
+        onClick={() => navigate('/inicial')} // Redireciona para a página inicial
+        style={{ cursor: 'pointer', position: 'absolute', top: '20px', left: '20px', width: '40px', height: '40px' }}
+      />
       <h2>Dados Pessoais</h2>
       <form onSubmit={handleSubmit}>
         <div className="form-group">

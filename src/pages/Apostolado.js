@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { fetchWithToken } from '../fetchUtils'; // Certifique-se de que a função fetchWithToken está importada
+import { useNavigate } from 'react-router-dom'; // Para navegação
+import voltar from '../images/voltar.png';
 import '../styles/common-form.css'; 
+import { fetchWithToken } from '../fetchUtils';
 
 const Apostolado = () => {
   const [memberId, setMemberId] = useState('');
@@ -8,6 +10,7 @@ const Apostolado = () => {
   const [error, setError] = useState(null);
   const [successMessage, setSuccessMessage] = useState(null);
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleDegreeChange = (index, key, value) => {
     const newDegrees = [...apostoladoDegrees];
@@ -44,23 +47,18 @@ const Apostolado = () => {
         };
       });
   
-      //const response = await fetchWithToken('http://localhost:5000/api/apostolado', {
-      const response = await fetchWithToken('http://localhost:5000/api/apostolado', {
+      const responseData = await fetchWithToken('https://detras.onrender.com/api/apostolado', {
+      //const responseData = await fetchWithToken('http://localhost:5000/api/apostolado', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({ cim: memberId, graus_apostolado: formattedDegrees })
       });
-  
-      const result = await response.json();
-  
-      if (!response.ok) {
-        throw new Error(result.errors?.[0]?.msg || 'Erro ao enviar dados.');
-      }
-  
+
+      // O `fetchWithToken` já faz o parse da resposta, não precisamos chamar `response.json()` novamente
       setApostoladoDegrees([{ degree: '', date: '', descricao: '' }]);
-      setSuccessMessage(result.message); // Atualizar a mensagem de sucesso
+      setSuccessMessage(responseData.message); // Atualizar a mensagem de sucesso
       setError(null);
     } catch (error) {
       console.error('Erro ao enviar dados:', error.message);
@@ -69,7 +67,6 @@ const Apostolado = () => {
       setLoading(false);
     }
   };
-  
 
   useEffect(() => {
     if (error) {
@@ -93,6 +90,14 @@ const Apostolado = () => {
 
   return (
     <div className="common-form">
+      {/* Ícone de voltar */}
+      <img 
+        src={voltar} 
+        alt="Voltar" 
+        onClick={() => navigate('/inicial')} // Redireciona para a página inicial
+        style={{ cursor: 'pointer', position: 'absolute', top: '20px', left: '20px', width: '40px', height: '40px' }}
+      />
+
       <h2>Graus de Apostolado</h2>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
@@ -142,7 +147,7 @@ const Apostolado = () => {
         </div>
 
         <div className="form-group">
-          <button type="submit" className="submit-button">Enviar</button>
+          <button type="submit" className="submit-button" disabled={loading}>Enviar</button>
         </div>
       </form>
       {error && <div className="error-message">{error}</div>}
@@ -153,3 +158,4 @@ const Apostolado = () => {
 }
 
 export default Apostolado;
+

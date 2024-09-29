@@ -12,6 +12,9 @@ import {
 } from 'chart.js';
 import withAdminProtection from '../withAdminProtection';
 import '../styles/PresencaForm.css';
+import voltar from '../images/voltar.png';
+import { useNavigate } from 'react-router-dom';
+import { fetchWithToken } from '../fetchUtils';
 
 ChartJS.register(
   CategoryScale,
@@ -32,10 +35,12 @@ const ControlePresencas = () => {
   const [dados, setDados] = useState([]);
   const chartRef = useRef(null);
 
+  const navigate = useNavigate();
+
   // Fetch dados de membros e reuniões
   useEffect(() => {
-    fetch('https://detras.onrender.com/api/presencas/membros')
-    //fetch('http://localhost:5000/api/presencas/membros')
+    fetchWithToken('https://detras.onrender.com/api/presencas/membros')
+    //fetchWithToken('http://localhost:5000/api/presencas/membros')
       .then(response => response.json())
       .then(data => {
         const initialPresencas = data.reduce((acc, membro) => {
@@ -47,8 +52,8 @@ const ControlePresencas = () => {
       })
       .catch(error => console.error('Erro ao buscar membros:', error));
 
-    fetch('https://detras.onrender.com/api/presencas/reunioes')
-    //fetch('http://localhost:5000/api/presencas/reunioes')
+    fetchWithToken('https://detras.onrender.com/api/presencas/reunioes')
+    //fetchWithToken('http://localhost:5000/api/presencas/reunioes')
       .then(response => response.json())
       .then(data => {
         setReunioes(data);
@@ -58,8 +63,8 @@ const ControlePresencas = () => {
 
   // Fetch dados de presenças para o gráfico
   useEffect(() => {
-    fetch('https://detras.onrender.com/api/presencas/listar')
-    //fetch('http://localhost:5000/api/presencas/listar')
+    fetchWithToken('https://detras.onrender.com/api/presencas/listar')
+    //fetchWithToken('http://localhost:5000/api/presencas/listar')
       .then(response => response.json())
       .then(data => {
         setDados(data);
@@ -87,8 +92,7 @@ const ControlePresencas = () => {
       data_reuniao: dataReuniao,
     }));
 
-    fetch('https://detras.onrender.com/api/presencas/registrar', {
-    //fetch('http://localhost:5000/api/presencas/registrar', {
+    fetch('http://localhost:5000/api/presencas/registrar', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -148,6 +152,14 @@ const ControlePresencas = () => {
 
   return (
     <div>
+
+      <img 
+        src={voltar} 
+        alt="Voltar" 
+        onClick={() => navigate('/inicial')} // Redireciona para a página inicial
+        style={{ cursor: 'pointer', position: 'absolute', top: '20px', left: '20px', width: '40px', height: '40px' }}
+      />
+
       <h1>Controle de Presenças</h1>
       <div className="form-container">
         <h2>Registro de Presenças</h2>

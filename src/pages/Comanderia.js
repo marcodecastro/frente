@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { fetchWithToken } from '../fetchUtils'; // Certifique-se de que a função fetchWithToken está importada
+import { fetchWithToken } from '../fetchUtils'; 
 import '../styles/common-form.css'; 
+import { useNavigate } from 'react-router-dom';
+import voltar from '../images/voltar.png';
 
 const Comanderia = () => {
   const [memberId, setMemberId] = useState('');
@@ -8,6 +10,8 @@ const Comanderia = () => {
   const [error, setError] = useState(null);
   const [successMessage, setSuccessMessage] = useState(null);
   const [loading, setLoading] = useState(false);
+
+  const navigate = useNavigate();
 
   const handleDegreeChange = (index, key, value) => {
     const newDegrees = [...comanderiaDegrees];
@@ -29,49 +33,44 @@ const Comanderia = () => {
     setLoading(true);
 
     try {
-        const validDegrees = comanderiaDegrees.filter(degree => degree.degree && degree.date && degree.descricao);
-        if (validDegrees.length === 0) {
-            throw new Error('Por favor, preencha todos os campos.');
-        }
+      const validDegrees = comanderiaDegrees.filter(degree => degree.degree && degree.date && degree.descricao);
+      if (validDegrees.length === 0) {
+        throw new Error('Por favor, preencha todos os campos.');
+      }
 
-        const formattedDegrees = validDegrees.map(degree => {
-            const [ano, mes, dia] = degree.date.split('-');
-            const utcDate = new Date(Date.UTC(ano, mes - 1, dia));
+      const formattedDegrees = validDegrees.map(degree => {
+        const [ano, mes, dia] = degree.date.split('-');
+        const utcDate = new Date(Date.UTC(ano, mes - 1, dia));
 
-            return {
-                grau: degree.degree,
-                data: utcDate.toISOString().split('T')[0],
-                descricao: degree.descricao
-            };
-        });
+        return {
+          grau: degree.degree,
+          data: utcDate.toISOString().split('T')[0],
+          descricao: degree.descricao
+        };
+      });
 
-        const response = await fetchWithToken('http://localhost:5000/api/comanderia', {
-        //const response = await fetchWithToken('http://localhost:5000/api/comanderia', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ cim: memberId, graus_comanderia: formattedDegrees })
-        });
+      const responseData = await fetchWithToken('https://detras.onrender.com/api/comanderia', {
+      //const responseData = await fetchWithToken('http://localhost:5000/api/comanderia', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ cim: memberId, graus_comanderia: formattedDegrees })
+      });
 
-        const result = await response.json();
+      // Como o `fetchWithToken` já faz o parse da resposta, removemos `response.json()`
+      setSuccessMessage(responseData.message || 'Operação bem-sucedida.');
+      setError(null);
 
-        if (response.ok) {
-            setSuccessMessage(result.message);
-            setError(null);
-        } else {
-            throw new Error(result.errors?.[0]?.msg || 'Erro ao enviar os dados.');
-        }
-
-        setComanderiaDegrees([{ degree: '', date: '', descricao: '' }]);
+      // Limpa o formulário
+      setComanderiaDegrees([{ degree: '', date: '', descricao: '' }]);
     } catch (error) {
-        console.error('Erro ao enviar dados:', error.message);
-        setError(error.message);
+      console.error('Erro ao enviar dados:', error.message);
+      setError(error.message);
     } finally {
-        setLoading(false);
+      setLoading(false);
     }
-};
-
+  };
 
   useEffect(() => {
     if (error) {
@@ -95,6 +94,14 @@ const Comanderia = () => {
 
   return (
     <div className="common-form">
+
+      <img 
+        src={voltar} 
+        alt="Voltar" 
+        onClick={() => navigate('/inicial')} // Redireciona para a página inicial
+        style={{ cursor: 'pointer', position: 'absolute', top: '20px', left: '20px', width: '40px', height: '40px' }}
+      />
+
       <h2>Comanderia de Cavaleiros Templários</h2>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
@@ -145,7 +152,7 @@ const Comanderia = () => {
         </div>
 
         <div className="form-group">
-          <button type="submit" className="submit-button">Enviar</button>
+          <button type="submit" className="submit-button" disabled={loading}>Enviar</button>
         </div>
       </form>
       {error && <div className="error-message">{Array.isArray(error) ? error.map((err, idx) => <p key={idx}>{err.msg}</p>) : <p>{error}</p>}</div>}
@@ -155,3 +162,4 @@ const Comanderia = () => {
 }
 
 export default Comanderia;
+

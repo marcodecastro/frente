@@ -1,14 +1,14 @@
-body {
-    margin: 0 auto;
-    height: 1200px;
-}
-
 .form-container {
     max-width: 700px;
     width: 100%;
     margin: 0 auto;
     padding: 0 20px;
     
+}
+
+h1 {
+    text-align: center;
+    margin-top: 50px;
 }
 
 .form-container h2 {
@@ -95,12 +95,14 @@ button.submit-btn {
     cursor: pointer;
     text-align: center;
     margin-top: 20px;
+    transition: background-color 0.3s, color 0.3s, font-size 0.3s, font-weight 0.3s;
+    
 }
 
 button.submit-btn:hover {
     background-color: black;
     color: white;
-    font-size: 22px;
+    font-size: 1.2em;
     font-weight: bold;
 }
 

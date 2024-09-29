@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { fetchWithToken } from '../fetchUtils'; // Certifique-se de que a função fetchWithToken está importada
+import { fetchWithToken } from '../fetchUtils'; 
 import '../styles/common-form.css'; 
+import { useNavigate } from 'react-router-dom';
+import voltar from '../images/voltar.png'; 
 
 const CapituloRealArco = () => {
   const [memberId, setMemberId] = useState('');
@@ -8,6 +10,7 @@ const CapituloRealArco = () => {
   const [error, setError] = useState(null);
   const [successMessage, setSuccessMessage] = useState(null);
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleDegreeChange = (index, key, value) => {
     const newDegrees = [...realArcoDegrees];
@@ -29,44 +32,43 @@ const CapituloRealArco = () => {
     setLoading(true);
 
     try {
-        const validDegrees = realArcoDegrees.filter(degree => degree.degree && degree.date && degree.descricao);
-        if (validDegrees.length === 0) {
-            throw new Error('Por favor, preencha todos os campos.');
-        }
-        const formattedDegrees = validDegrees.map(degree => {
-            const [ano, mes, dia] = degree.date.split('-');
-            const utcDate = new Date(Date.UTC(ano, mes - 1, dia));
+      const validDegrees = realArcoDegrees.filter(degree => degree.degree && degree.date && degree.descricao);
+      if (validDegrees.length === 0) {
+        throw new Error('Por favor, preencha todos os campos.');
+      }
 
-            return {
-                grau: degree.degree,
-                data: utcDate.toISOString().split('T')[0], // Formato 'yyyy-MM-dd'
-                descricao: degree.descricao
-            };
-        });
+      const formattedDegrees = validDegrees.map(degree => {
+        const [ano, mes, dia] = degree.date.split('-');
+        const utcDate = new Date(Date.UTC(ano, mes - 1, dia));
 
-        //const response = await fetchWithToken('http://localhost:5000/api/capitulorealarco', {
-        const response = await fetchWithToken('http://localhost:5000/api/capitulorealarco', {
-            method: 'POST',
-            body: JSON.stringify({ cim: memberId, graus_capitulorealarco: formattedDegrees })
-        });
+        return {
+          grau: degree.degree,
+          data: utcDate.toISOString().split('T')[0], 
+          descricao: degree.descricao
+        };
+      });
 
-        if (!response.ok) {
-            throw new Error('Erro ao enviar dados.');
-        }
+      //const responseData = await fetchWithToken('http://localhost:5000/api/capitulorealarco', {
+      const responseData = await fetchWithToken('https://detras.onrender.com/api/capitulorealarco', {
+        method: 'POST',
+        body: JSON.stringify({ cim: memberId, graus_capitulorealarco: formattedDegrees })
+      });
 
-        const result = await response.json();
+      if (!responseData.ok) {
+        throw new Error(responseData.message || 'Erro ao enviar dados.');
+      }
 
-        setRealArcoDegrees([{ degree: '', date: '', descricao: '' }]);
-        setSuccessMessage(result.message || 'Dados enviados com sucesso.');
-        setError(null);
+      // Limpa os campos após sucesso
+      setRealArcoDegrees([{ degree: '', date: '', descricao: '' }]);
+      setSuccessMessage(responseData.message || 'Dados enviados com sucesso.');
+      setError(null);
     } catch (error) {
-        console.error('Erro ao enviar dados:', error.message);
-        setError(error.message || 'Erro ao enviar dados.');
+      console.error('Erro ao enviar dados:', error.message);
+      setError(error.message || 'Erro ao enviar dados.');
     } finally {
-        setLoading(false);
+      setLoading(false);
     }
-};
-
+  };
 
   useEffect(() => {
     if (error) {
@@ -90,6 +92,14 @@ const CapituloRealArco = () => {
 
   return (
     <div className="common-form">
+
+    <img 
+        src={voltar} 
+        alt="Voltar" 
+        onClick={() => navigate('/inicial')} 
+        style={{ cursor: 'pointer', position: 'absolute', top: '20px', left: '20px', width: '40px', height: '40px' }}
+      />
+
       <h2>Capítulo do Real Arco</h2>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
@@ -141,11 +151,12 @@ const CapituloRealArco = () => {
         </div>
 
         <div className="form-group">
-          <button type="submit" className="submit-button">Enviar</button>
+          <button type="submit" className="submit-button" disabled={loading}>Enviar</button>
         </div>
       </form>
-      {error && <div className="error-message">{Array.isArray(error) ? error.map((err, idx) => <p key={idx}>{err.msg}</p>) : <p>{error}</p>}</div>}
-      {successMessage && <div className="success-message"><p>{successMessage}</p></div>}
+      {error && <div className="error-message">{error}</div>}
+      {successMessage && <div className="success-message">{successMessage}</div>}
+      {loading && <div className="loading-message">Carregando...</div>}
     </div>
   );
 }

@@ -2,10 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import redusida from '../images/redusida.jpg';
 import '../styles/Home.css';
-import '../styles/reset.css';
 
 const Home = () => {
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem('token'); 
   const isLoggedIn = !!token;  
   const userName = JSON.parse(localStorage.getItem('userData'))?.nome || ''; 
  
@@ -13,11 +12,11 @@ const Home = () => {
         <div className="logged-in-home-page">
           <header className="home-header">
             <h1>Bem-vindo{isLoggedIn ? `, ${userName}` : ''}!</h1>
-            <p>Comemorações Maçônicas para Chancelaria.</p>
+            <p>À Comemorações Maçônicas para Chancelaria.</p>
           </header>
     
           <section className="home-content">
-            <p>As comemorações maçônicas são eventos especiais que marcam momentos importantes na história do Membro na Maçonaria. Essas comemorações são uma oportunidade para os maçons se reunirem, e celebrarem suas conquistas e reafirmarem seu compromisso com os princípios e valores maçônicos.</p>
+            <p>Comemorações maçônicas para chancelaria, traz além de comemorações diárias, também oferece ao chanceler um controle de presenças de membros e página exclusiva com comemorações diárias e comemorações semanais de membros e efemérides.</p>
     
             <div className="home-image-container">
               <img src={redusida} alt="Comemorações Maçônicas" className="home-image" />

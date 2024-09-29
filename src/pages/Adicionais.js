@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import '../styles/common-form.css';
 import { fetchWithToken } from '../fetchUtils';
+import { useNavigate } from 'react-router-dom';
+import voltar from '../images/voltar.png';
 
 const Adicionais = () => {
   const [memberId, setMemberId] = useState('');
@@ -8,6 +10,8 @@ const Adicionais = () => {
   const [error, setError] = useState(null);
   const [successMessage, setSuccessMessage] = useState(null);
   const [loading, setLoading] = useState(false);
+
+  const navigate = useNavigate();
 
   const handleDegreeChange = (index, key, value) => {
     const newDegrees = [...additionalDegrees];
@@ -45,22 +49,18 @@ const Adicionais = () => {
         };
       });
 
-      const response = await fetchWithToken('https://detras.onrender.com/api/adicionais', {
-      //const response = await fetchWithToken('http://localhost:5000/api/adicionais', {
+      const responseData = await fetchWithToken('https://detras.onrender.com/api/adicionais', {
+      //const responseData = await fetchWithToken('http://localhost:5000/api/adicionais', {
         method: 'POST',
         body: JSON.stringify({ cim: memberId, graus_adicionais: formattedDegrees }),
         headers: { 'Content-Type': 'application/json' }
       });
 
-      if (response.ok) {
-        const data = await response.json();
-        setAdditionalDegrees([{ degree: '', date: '', descricao: '' }]);
-        setSuccessMessage(data.message);
-        setError(null);
-      } else {
-        const errorData = await response.json();
-        throw new Error(errorData.errors ? errorData.errors[0].msg : 'Erro ao enviar dados para o servidor');
-      }
+      // O fetchWithToken já faz o parse da resposta, não precisamos chamar response.json() aqui
+      setAdditionalDegrees([{ degree: '', date: '', descricao: '' }]);
+      setSuccessMessage(responseData.message || 'Operação bem-sucedida.');
+      setError(null);
+      
     } catch (error) {
       console.error('Erro ao enviar dados:', error.message);
       setError(error.message);
@@ -91,6 +91,14 @@ const Adicionais = () => {
 
   return (
     <div className="common-form">
+
+      <img 
+        src={voltar} 
+        alt="Voltar" 
+        onClick={() => navigate('/inicial')} // Redireciona para a página inicial
+        style={{ cursor: 'pointer', position: 'absolute', top: '20px', left: '20px', width: '40px', height: '40px' }}
+      />
+
       <h2>Graus Adicionais</h2>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
@@ -152,6 +160,7 @@ const Adicionais = () => {
 }
 
 export default Adicionais;
+
 
 
 

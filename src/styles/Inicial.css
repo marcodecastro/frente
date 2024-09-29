@@ -1,37 +1,28 @@
-.logged-in-home-page {
-  margin-top: 0; 
-  background-color: black;
-  color: rgb(200, 200, 150);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-family: 'Arial', sans-serif;
-  height: 100%;
-  border-radius: 25px;
-}
-
-
-body {
-  margin: 0;
-  padding: 0;
-  /*height: 100vh;*/
-  justify-content: space-around;
+.paginaInicial {
+  background-color: #eedede;
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
   width: 100%;
-  background-color: #f5f5f5;
+  margin-bottom: 20px;
+}
+
+/*h1 {
   font-family: 'Roboto', sans-serif;
-}
+  display: block;
+  font-size: 2.5em;
+  margin-block-start: 0.67em;
+  margin-block-end: 0.67em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  font-weight: bold;
+  unicode-bidi: isolate;
+} */
 
-
-.btn-black:after {
-  background: #4a4f68;
-}
-
-.container {
+.containerInicial {
+  margin-bottom: 3000px;
+  margin-top: 10px;
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
@@ -44,7 +35,7 @@ body {
   justify-content: center;
   align-items: center;
   border-radius: 10px;
-  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.5);
   padding: 20px;
   width: 100%;
   height: 350px;
@@ -54,7 +45,7 @@ body {
 
 .card:hover {
   background-color: #a0dfe7;
-  /*transform: scale(1.05);*/
+  transform: scale(1.05);
 }
 
 .icon {
@@ -91,6 +82,7 @@ h2, p {
   z-index: 0;
   border-radius: 10px;
 }
+
 
 .btn:hover {
   width: 300px;
@@ -144,66 +136,18 @@ h2, p {
   border-radius: 10px;
 }
 
-.home-link {
-  text-decoration: none;
-  font-size: medium;
-  font-weight: bold;
-  transition: color 0.3s ease-in-out;
-}
-
 @keyframes glowing {
   0% { background-position: 0 0; }
   50% { background-position: 400% 0; }
   100% { background-position: 0 0; }
 }
 
-.dashboard-links {
-  margin: 20px;
-  padding: 20px;
-  background-color: #f5f5f5;
-  border-radius: 10px;
-  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
-}
-
-.dashboard-links h2 {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-.dashboard-links ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-.dashboard-links li {
-  margin: 10px 0;
-}
-
-.dashboard-link {
-  text-decoration: none;
-  color: #084887;
-  font-weight: bold;
-  transition: color 0.3s ease-in-out;
-}
-
-.dashboard-link:hover {
-  color: #a0dfe7;
-}
 
 @media (max-width: 600px) {
   .card {
     width: 90%; 
     height: auto; 
     margin: 10px auto; 
-  }
-
-  .dashboard-links {
-    margin: 10px;
-    padding: 10px;
-  }
-
-  .dashboard-link {
-    font-size: 14px;
   }
 }
 

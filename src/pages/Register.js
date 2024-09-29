@@ -3,6 +3,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import mail from "../images/email.png";
 import lock from "../images/lock.png";
 import profile from "../images/icon.png";
+import cim from "../images/cim.png";
+import cadastro from "../images/cadastro.png";
 import '../styles/Register.css';
 import { UserContext } from '../UserContext';
 
@@ -18,7 +20,7 @@ function Register() {
   useEffect(() => {
     if (success) {
       setTimeout(() => {
-        navigate('/inicial');
+        navigate('/login');
       }, 2000);
     }
   }, [success, navigate]);
@@ -43,8 +45,8 @@ function Register() {
     }
 
     try {
-      const response = await fetch('https://detras.onrender.com/api/auth/register', {
-      //const response = await fetch('http://localhost:5000/api/auth/register', {
+      //const response = await fetch('https://detras.onrender.com/api/auth/register', {
+      const response = await fetch('http://localhost:5000/api/auth/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -75,10 +77,13 @@ function Register() {
     <form onSubmit={handleSubmit}>
       <div className='main'>
         <div className='sub-main'>
-          <div>
+          <div className='imgs'>
             <div>
+              <div className='container-image'>
+              <img src={cadastro} alt='cadastro' className='cadastro'/>
+              </div>
               <h1>Registre-se</h1>
-              <div>
+              <div className='mail-id'>
                 <img src={profile} alt="nome" className='email' />
                 <input type="text" placeholder='Digite seu Nome' className='fill' value={form.nome} onChange={handleChange} name="nome"/>
               </div>
@@ -95,7 +100,7 @@ function Register() {
                 <input type="password" placeholder='Confirme a Senha' className='fill' value={form.confirmarSenha} onChange={handleChange} name="confirmarSenha"/>
               </div>
               <div className='mail-id'>
-                <img src={profile} alt="cim" className='email' />
+                <img src={cim} alt="cim" className='email' />
                 <input type="text" placeholder='Digite seu CIM' className='fill' value={form.cim} onChange={handleChange} name="cim"/>
               </div>
               <div className='login-btn'>
